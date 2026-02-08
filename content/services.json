@@ -1,0 +1,66 @@
+{
+  "title": "Services And Packages",
+  "lead": "Professional makeup and hair services for parties, events, photoshoots, and weddings.",
+
+  "packages": {
+    "makeup": {
+      "title": "Makeup Package",
+      "price": "~$150",
+      "items": [
+        "Professional makeup application",
+        "Skin preparation",
+        "False lashes (optional)",
+        "Long-lasting makeup products",
+        "Light touch-up before completion"
+      ]
+    },
+    "hair": {
+      "title": "Hair Styling Package",
+      "price": "~$150",
+      "items": [
+        "Professional hairstyling",
+        "Blowout or updo styling",
+        "Hair prep and finishing",
+        "Long-lasting hold products"
+      ]
+    },
+    "combo": {
+      "title": "Makeup + Hair Package",
+      "price": "~$280",
+      "items": [
+        "Full makeup application",
+        "Professional hairstyling",
+        "Skin and hair preparation",
+        "False lashes (optional)",
+        "Complete polished look for any occasion"
+      ]
+    }
+  },
+
+  "sections": {
+    "additional": {
+      "title": "Additional Services",
+      "items": [
+        "On-location service — price varies",
+        "Extra touch-up time — $50 per hour",
+        "Additional client (makeup or hair) — from $120",
+        "Hairstyle change — $60",
+        "Extensions application — $30"
+      ]
+    },
+    "travel": {
+      "title": "Travel Fees",
+      "items": [
+        "Local area — included",
+        "Other NY/NJ locations — starting from $50",
+        "Travel fee may vary depending on distance and number of clients"
+      ]
+    },
+    "early": {
+      "title": "Early Start",
+      "items": [
+        "Appointments before 8am — $100 per artist"
+      ]
+    }
+  }
+}

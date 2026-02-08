@@ -1,0 +1,906 @@
+:root{
+  --bg:#ffffff;
+  --text:#5f646a;
+  --heading:#575c61; 
+  --muted:#8d9297;
+  --border:#e9edf0;
+  --card:#ffffff;
+  --radius:16px;
+  --shadow:0 10px 28px rgba(0,0,0,.08);
+  --thumb-ratio: 3/4;
+
+  --field-bg: #fff;
+  --field-text: #4b5055;
+  --field-border: #cfd6dc;
+  --field-border-focus: #aeb6be;
+  --field-shadow-focus: rgba(0,0,0,.06);
+
+  /* Inquiry background */
+  --inq-bg: url("/img/site/1-12.jpg");
+  --inq-bg-opacity: .85;
+  
+    /* Services background */
+  --svc-bg: url("/img/site/1-9.jpg"); 
+  --svc-bg-opacity: .9;
+  --svc-bg-tint: rgba(255,255,255,.06);
+
+}
+
+/* ===== Services page background (full page) ===== */
+.services{
+  position: relative;
+  background: transparent;
+}
+
+.services::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(var(--svc-bg-tint), var(--svc-bg-tint)),
+    var(--svc-bg) center/cover no-repeat;
+  opacity: var(--svc-bg-opacity);
+  pointer-events: none;
+}
+
+.services .section > .container{
+  background: rgba(255,255,255,0);
+  backdrop-filter: blur(4px);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+@media (max-width:640px){
+  .services::before{
+    background:
+      linear-gradient(var(--svc-bg-tint), var(--svc-bg-tint)),
+      var(--svc-bg) 50% 40% / cover no-repeat;
+  }
+}
+
+
+
+/* ---------- Base ---------- */
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font:16px/1.7 "Source Serif 4","Georgia","Baskerville","Times New Roman",serif;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+img{ max-width:100%; display:block }
+a{ color:inherit; text-decoration:none }
+.container{ max-width:1100px; margin:0 auto; padding:0 20px }
+.container.narrow{ max-width:760px }
+.section{ padding:56px 0 }
+.muted{ color:var(--muted) }
+
+h1,h2,h3{
+  font-family:"Bodoni Moda","Didot","Bodoni 72","Playfair Display",serif;
+  color:var(--heading);
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  line-height:1.25;
+  margin:0 0 .6em;
+}
+p{ margin:.9em 0 }
+hr{ border:0; height:1px; background:var(--border); margin:22px 0 }
+
+.site-header{
+  position:sticky; top:0; z-index:100;
+  background:#fff; border-bottom:1px solid var(--border);
+}
+.nav-wrap{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  height:64px;
+}
+
+.site-header .logo,
+.site-header .logo:link,
+.site-header .logo:visited,
+.site-header .logo:hover{ color:#000 !important; }
+.site-header .logo span{ color:inherit !important; }
+
+@media (min-width:841px){
+  .mobile-contacts, .nav-toggle{ display:none; }
+  .site-nav ul{ display:flex; gap:16px; list-style:none; margin:0; padding:0; }
+  .site-nav a{ padding:10px 12px; border-radius:10px; color:var(--heading); }
+  .site-nav a:hover, .site-nav a.active{ background:rgba(0,0,0,.05); }
+}
+
+@media (max-width:840px){
+  .mobile-contacts{ display:inline-flex; gap:12px; margin-left:auto; }
+  .contact-icon{
+    display:inline-grid; place-items:center; width:36px; height:36px;
+    color:#000; text-decoration:none; background:transparent; border:none;
+  }
+  .contact-icon svg *{ stroke:#000; fill:#000; }
+
+  .nav-toggle{
+    display:inline-flex; flex-direction:column; justify-content:center;
+    gap:5px; padding:10px; margin-left:6px; background:transparent; border:none; cursor:pointer;
+  }
+  .nav-toggle .bar{ width:30px; height:2px; background:#000; border-radius:2px; display:block; }
+
+  .site-nav ul{
+    position:absolute; top:64px; right:10px;
+    background:#fff; border:1px solid var(--border); border-radius:12px;
+    padding:10px; display:none; flex-direction:column; min-width:200px;
+    box-shadow:var(--shadow); list-style:none; margin:0;
+  }
+  .site-nav ul.open{ display:flex; }
+  .site-nav a{ padding:10px 12px; border-radius:10px; color:var(--heading); }
+  .site-nav a:hover, .site-nav a.active{ background:rgba(0,0,0,.05); }
+}
+
+/* ---------- Buttons ---------- */
+.btn, .btn-primary, .btn-ghost{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  border-radius:12px; padding:12px 16px; font-weight:600;
+  background:#000; color:#fff; border:1px solid #000; cursor:pointer; transition:.2s ease;
+}
+.btn:hover, .btn-primary:hover, .btn-ghost:hover{ opacity:.9; transform:translateY(-1px); }
+
+/* ---------- Cards ---------- */
+.card{
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius); box-shadow:var(--shadow); padding:20px;
+}
+
+/* ---------- Home / About ---------- */
+.home #about .about-centered{
+  max-width:760px; margin:0 auto; display:grid; gap:18px; text-align:center;
+}
+.home #about .about-photo{
+  width:clamp(220px,32vw,300px); margin:0 auto 6px;
+  aspect-ratio:3/4; border-radius:0; overflow:hidden; box-shadow:var(--shadow);
+}
+.home #about .about-photo img{ width:100%; height:100%; object-fit:cover }
+.home #about .about-copy p{ line-height:1.8 }
+
+/* ---------- Gallery ---------- */
+.gallery{
+  display:grid; gap:12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.gallery figure{
+  margin:0; background:var(--card); border:1px solid var(--border);
+  border-radius:0; overflow:hidden; box-shadow:var(--shadow);
+  aspect-ratio: var(--thumb-ratio);
+}
+.gallery img{ width:100%; height:100%; object-fit:cover;
+  image-rendering: auto;
+  -ms-interpolation-mode: bicubic;
+}
+
+ @media (min-width:1040px){
+  .gallery { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+}
+@media (min-width:1200px){
+  .gallery { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+}
+
+/* ===== Mobile portfolio: 2-column masonry (без пустот) ===== */
+@media (max-width: 640px){
+  .gallery{
+    column-count: 2;
+    column-gap: 8px;
+  }
+
+  .gallery figure{
+    /* важно: чтобы карточки не ломались внутри колонки */
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+
+    /* “карточка” */
+    margin: 0 0 8px;
+    border: 1px solid var(--border);
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+
+    /* высота задаётся контентом/картинкой */
+    height: auto;
+  }
+
+  .gallery figure img{
+    width: 100%;
+    height: auto;       /* masonry любит auto */
+    display: block;
+  }
+
+  /* Первая фотка чуть короче (как ты хочешь) */
+  .gallery figure:first-child img{
+    aspect-ratio: 4 / 5;   /* чуть “короче” чем остальные */
+    object-fit: cover;
+    height: auto;
+  }
+
+  /* остальные можно сделать одинаковыми по “ощущению” */
+  .gallery figure:not(:first-child) img{
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    height: auto;
+  }
+}
+@media (max-width: 640px){
+  .gallery figure:nth-child(2) img{
+    aspect-ratio: 3 / 3.2; /* чуть “длиннее” */
+    object-fit: cover;
+  }
+}
+/* =================== Inquiry page =================== */
+
+.inquiry .section{
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  padding-block: 24px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.inquiry .section::before{
+  content:"";
+  position: absolute; inset: 0;
+  background: var(--inq-bg) center/cover no-repeat;
+  opacity: var(--inq-bg-opacity);
+  filter: contrast(1.18) brightness(1.07);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.inquiry .section > .container.narrow{
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,.82);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 22px;
+  box-shadow: var(--shadow);
+}
+
+.inquiry .section .container.narrow h1{
+  margin: 0 0 14px;
+  text-align: left;
+}
+
+.inquiry form{ display:grid; gap:16px }
+.inquiry .form-row{ display:grid; gap:8px }
+
+.inquiry label{
+  font-weight:500;
+  font-size:1rem;
+  color:var(--heading);
+}
+
+.inquiry input,
+.inquiry textarea,
+.inquiry select,
+.inquiry button.btn{
+  font-family: inherit;
+}
+
+.inquiry input{
+  width:100%;
+  background: var(--field-bg);
+  color: var(--field-text);
+  border: 2px solid var(--field-border);
+  border-radius:12px;
+  padding:16px 14px;
+  font-size:18px;
+  line-height:1.2;
+}
+.inquiry input:focus{
+  outline:none;
+  border-color: var(--field-border-focus);
+  box-shadow: 0 0 0 4px var(--field-shadow-focus);
+}
+
+.inquiry textarea,
+.inquiry select{
+  width:100%;
+  min-height:52px;
+  font-size:16px;
+  line-height:1.2;
+  padding:12px 14px;
+  font-weight:400;
+  background: var(--field-bg);
+  color: var(--field-text);
+  border: 2px solid var(--field-border);
+  border-radius:12px;
+}
+.inquiry textarea{
+  min-height:120px;
+  line-height:1.5;
+}
+.inquiry textarea:focus,
+.inquiry select:focus{
+  outline:none;
+  border-color: var(--field-border-focus);
+  box-shadow: 0 0 0 4px var(--field-shadow-focus);
+}
+
+/* placeholders */
+.inquiry input::placeholder,
+.inquiry textarea::placeholder{
+  color: var(--muted);
+  opacity: 1;
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+}
+
+.inquiry input::-webkit-input-placeholder,
+.inquiry textarea::-webkit-input-placeholder{ color: var(--muted); opacity:1; }
+.inquiry input::-moz-placeholder,
+.inquiry textarea::-moz-placeholder{ color: var(--muted); opacity:1; }
+.inquiry input:-ms-input-placeholder,
+.inquiry textarea:-ms-input-placeholder{ color: var(--muted); opacity:1; }
+.inquiry input::-ms-input-placeholder,
+.inquiry textarea::-ms-input-placeholder{ color: var(--muted); opacity:1; }
+
+/* date input */
+.inquiry input[type="date"]{
+  width:100%; min-width:0; height:52px; line-height:52px;
+  padding:0 44px 0 14px; box-sizing:border-box; font-size:16px; display:block;
+  -webkit-appearance:none; appearance:none;
+}
+.inquiry input[type="date"]::-webkit-datetime-edit,
+.inquiry input[type="date"]::-webkit-datetime-edit-month-field,
+.inquiry input[type="date"]::-webkit-datetime-edit-day-field,
+.inquiry input[type="date"]::-webkit-datetime-edit-year-field,
+.inquiry input[type="date"]::-webkit-datetime-edit-text{
+  color: var(--muted); font-weight:400; font-family:inherit; font-size:16px;
+}
+.inquiry input[type="date"]::-webkit-calendar-picker-indicator{
+  filter: grayscale(100%) opacity(.7);
+}
+.inquiry .date-field{ position:relative; height:52px; }
+.inquiry .date-field .hint{
+  position:absolute; left:14px; top:50%; transform:translateY(-50%);
+  color:var(--muted); pointer-events:none; z-index:2; transition:.15s ease; display:none;
+}
+@media (max-width:640px){ .inquiry .date-field .hint{ display:block; } }
+.inquiry .date-field:focus-within .hint,
+.inquiry .date-field.filled .hint{ opacity:0; transform:translateY(-60%); }
+
+.inquiry select{
+  -webkit-appearance:none; appearance:none;
+  height:52px; line-height:52px; padding:0 44px 0 14px;
+}
+.inquiry select:required:invalid{ color: var(--muted); }
+.inquiry option{ color: var(--field-text); }
+@media (max-width:640px){
+  .inquiry select{ height:56px; line-height:56px; }
+}
+
+.inquiry button.btn{
+  width:auto; padding:10px 18px; font-size:16px; line-height:1.1;
+  justify-self: start;                   /* ← слева */
+}
+
+@media (max-width:640px){
+  .inquiry .section > .container.narrow{ margin-left: 12px; margin-right: 12px; }
+}
+
+.grid{ display:grid; gap:20px; }
+.grid.cols-3{ grid-template-columns:1fr; }
+@media (min-width:700px){ .grid.cols-3{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (min-width:1040px){ .grid.cols-3{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
+
+@media (max-width:699px){
+  .services .grid.cols-3{
+    padding-inline:16px;
+    row-gap:28px;
+  }
+  .services .card{
+    border:1.5px solid #d1d7dc;
+    box-shadow:var(--shadow);
+    border-radius:var(--radius);
+    padding:24px;
+  }
+  .services .card .title{ margin-bottom:10px; }
+}
+
+.services h1,
+.services h2,
+.services .card .title h3{
+  color: #444a50;
+  font-weight: 500;
+  letter-spacing: .08em;
+}
+
+@media (min-width: 1040px){
+  .services .section .container.narrow h1{
+    text-align: left;
+    margin: 0;
+  }
+  .services .section .container.narrow{
+    margin-bottom: 36px;
+  }
+  .services .grid.cols-3{
+    padding-inline: 20px;
+  }
+  .services .section .container.narrow{ max-width: 1100px; }
+}
+
+.site-header .logo,
+.site-header .logo:link,
+.site-header .logo:visited,
+.site-header .logo:hover,
+.site-header .logo:active{
+  font-family:"Source Serif 4","Georgia","Baskerville","Times New Roman",serif!important;
+  color:var(--text)!important; letter-spacing:.01em; text-transform:none; font-weight:600;
+}
+.site-header .logo span{ color:inherit!important; }
+
+/* Icon */
+.contact-icon svg *{ stroke:var(--heading)!important; fill:none!important; }
+.contact-icon svg .ig-dot{ fill:var(--heading)!important; stroke:none!important; }
+
+/* Menu */
+.mobile-contacts{ display:inline-flex; gap:12px; margin-left:auto; }
+.nav-toggle{
+  display:inline-flex; flex-direction:column; justify-content:center;
+  gap:5px; padding:10px; margin-left:6px; background:transparent; border:none; cursor:pointer;
+}
+.nav-toggle .bar{ width:30px; height:2px; background:#000; border-radius:2px; display:block; }
+.site-nav ul{
+  position:absolute; top:64px; right:10px; background:#fff; border:1px solid var(--border);
+  border-radius:12px; padding:10px; display:none; flex-direction:column; min-width:220px;
+  box-shadow:var(--shadow); list-style:none; margin:0;
+}
+.site-nav ul.open{ display:flex!important; }
+@media (min-width:841px){
+  .site-nav ul{ display:none!important; }
+  .site-nav a{ color:var(--heading); padding:10px 12px; border-radius:10px; }
+  .site-nav a:hover, .site-nav a.active{ background:rgba(0,0,0,.05); }
+}
+
+.home #about .about-photo,
+.home #about .about-photo img{ border-radius:0; box-shadow:none; }
+
+.modal{ position:fixed; inset:0; display:grid; place-items:center; padding:20px; z-index:200; transition:.2s; }
+.modal[aria-hidden="true"]{ opacity:0; pointer-events:none; }
+.modal-backdrop{ position:absolute; inset:0; background:rgba(0,0,0,.28); }
+.modal-dialog{
+  position:relative; width:min(520px,95vw); background:#fff; border:1px solid var(--border);
+  border-radius:16px; padding:20px; box-shadow:var(--shadow); color:var(--text);
+}
+.modal-close{
+  position:absolute; top:10px; right:10px; background:#fff; border:1px solid var(--border);
+  border-radius:10px; width:36px; height:36px; cursor:pointer;
+}
+.modal-dialog form{ display:grid; gap:14px; }
+.modal-dialog .form-row{ display:grid; gap:6px; }
+.modal-dialog label{ font-weight:700; color:var(--heading); }
+.modal-dialog input, .modal-dialog textarea{
+  background:#fff; border:1px solid var(--border); color:var(--text);
+  border-radius:12px; padding:12px; font:inherit;
+}
+.modal-dialog input:focus, .modal-dialog textarea:focus{
+  outline:none; border-color:#bdbdbd; box-shadow:0 0 0 3px rgba(0,0,0,.10);
+}
+.xs{ font-size:.9rem; }
+@media (max-width: 640px){
+  .inquiry .section{ justify-items: center; }
+  .inquiry .section > .container.narrow{ margin-left: 0; }
+}
+@media (max-width: 640px){
+  .inquiry .section::before{
+    top: -24px;
+    height: calc(100% + 24px);
+    background-position: 50% 50%;
+  }
+}
+
+.inquiry input[type="file"]{
+  width:100%;
+  background: var(--field-bg);
+  color: var(--muted);
+  border: 2px solid var(--field-border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font: inherit;
+  line-height: 1.2;
+}
+
+.inquiry input[type="file"]::file-selector-button{
+  background: #f3f5f7;
+  color: var(--heading);
+  border: 1px solid var(--field-border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-right: 12px;
+  font: inherit;
+  cursor: pointer;
+  transition: .15s ease;
+}
+.inquiry input[type="file"]::file-selector-button:hover{
+  background: #eef1f4;
+  border-color: var(--field-border-focus);
+}
+
+.inquiry input[type="file"]::-webkit-file-upload-button{
+  background: #f3f5f7;
+  color: var(--heading);
+  border: 1px solid var(--field-border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-right: 12px;
+  font: inherit;
+  cursor: pointer;
+  transition: .15s ease;
+}
+.inquiry input[type="file"]::-webkit-file-upload-button:hover{
+  background: #eef1f4;
+  border-color: var(--field-border-focus);
+}
+
+.inquiry .form-hint{
+  color: var(--muted);
+  font-size: .9rem;
+  margin-top: 6px;
+}
+
+
+.services .section > .container{
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+
+.blur-title{
+  position: relative;
+  display: inline-block;  
+  z-index: 0;
+}
+
+.blur-title::before{
+  content: "";
+  position: absolute;
+  inset: -4px -10px;     
+  background: rgba(255,255,255,.12); 
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  border-radius: 14px;
+  z-index: -1;
+}
+
+@media (max-width:640px){
+  .services .section .container.narrow h1.blur-title{
+    display: inline-block;
+  }
+  .blur-title::before{
+    inset: -3px -8px;
+  }
+}
+.services h1.blur-title{ max-width: 90vw !important; }
+
+
+/* === HERO: headline slightly below middle + softer crop + gray button === */
+:root{
+  --hero-bg: url("/img/portfolio/1-8.jpg");
+  --hero-tint: rgba(0,0,0,.18);
+}
+
+.home .hero{
+  position: relative;
+  min-height: calc(100svh - 64px);
+  background: var(--hero-bg) 50% 38% / cover no-repeat;
+  overflow: hidden;
+}
+
+
+@media (min-width:1024px){ .home .hero{ background-position: 50% 32%; } }
+@media (max-width:640px){  .home .hero{ background-position: 50% 50%; } }
+
+
+.home .hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background: var(--hero-tint);
+  pointer-events:none;
+}
+.home .hero::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(0,0,0,.35) 28%, transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.home .hero .hero-inner{
+  position: absolute;
+  left: 50%;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: min(92vw, 1000px);
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+  text-align: center;
+  padding: 0 16px;
+  z-index: 1;
+}
+
+@media (min-width:1024px){
+  .home .hero .hero-inner{ bottom: 40px; }
+}
+
+/* краткое описание услуги */
+.home .hero .hero-title{
+  margin: 0;
+  color: #fff;
+  letter-spacing: .12em;
+  line-height: 1.15;
+  font-family:"Bodoni Moda","Didot","Bodoni 72","Playfair Display",serif;
+  font-weight: 500;
+  font-size: clamp(26px, 4.5vw, 48px);
+  text-shadow: 0 1px 2px rgba(0,0,0,.25);
+  text-transform: none;
+}
+
+/* кнопка */
+.home .hero .btn{
+  background: #ffffff;
+  border-color: #60666d;
+  color: #60666d;
+  padding: 14px 22px;
+  font-size: 1rem;
+  border-radius: 12px;
+  transition: transform .2s ease, opacity .2s ease, background-color .2s ease;
+}
+.home .hero .btn:hover{
+  background: #565c63;
+  border-color: #565c63;
+
+  opacity: .95;
+  transform: translateY(-1px);
+}
+.home .hero .btn:active{ transform: translateY(0); }
+
+/* небольшой отступ перед секцией About */
+.home #about.section{ padding-top: 40px; }
+/* === SERVICES: вернуть фон без высветления === */
+.services{
+  /* делаем фон менее молочным (убираем белую вуаль) */
+  --svc-bg-opacity: .65;                 /* было .9, стало мягче */
+  --svc-bg-tint: rgba(255,255,255,0);    /* убрали белый тинт полностью */
+}
+
+/* на всякий случай снимаем любое размытие/молочность у контейнеров */
+.services .section > .container{
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* === SERVICES: сделать грид «во всю ширину» как раньше === */
+/* именно второй .container с карточками — на всю ширину вьюпорта */
+.services .section > .container + .container{
+  max-width: none !important;            /* снимаем ограничение 1100px */
+  width: 100% !important;
+  padding-left: 20px;                    /* аккуратные поля по краям */
+  padding-right: 20px;
+}
+
+/* сетка остаётся как была: 1 → 2 → 3 колонки */
+.grid.cols-3{ grid-template-columns: 1fr; }
+@media (min-width:700px){ .grid.cols-3{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (min-width:1040px){ .grid.cols-3{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
+
+/* === 1) SERVICES: убираем мутность/вуаль полностью === */
+.services::before{
+  /* только фото, без белого слоя и без лишней непрозрачности */
+  background: var(--svc-bg) center/cover no-repeat !important;
+  opacity: .35 !important;           /* можешь 0.30–0.45 по вкусу */
+}
+
+/* гарантированно убираем любой блюр/молочность над фоном */
+.services .section > .container{
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* === 2) SERVICES: делаем контентную область шире, как было (и даже шире) === */
+/* это ВТОРОЙ контейнер внутри секции — где сетка карточек */
+.services .section > .container + .container{
+  max-width: 1400px !important;   /* раньше было 1100 — расширяем */
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+/* === 3) Сетка карточек: широкие карточки + адекватные колонки === */
+/* авто-колонки: 1 на телефоне, 2–4 на больших экранах */
+.services .grid.cols-3{
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+  column-gap: 20px !important;
+  row-gap: 20px !important;
+  padding-inline: 0 !important;
+}
+
+/* На очень больших экранах позволим стать ещё шире и 4 колонки выглядят гармонично */
+@media (min-width: 1200px){
+  .services .grid.cols-3{
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    column-gap: 24px !important;
+    row-gap: 24px !important;
+  }
+}
+
+/* === 4) Карточки не «вытягиваем»: компактнее вертикально === */
+.services .card{
+  padding: 18px !important;
+}
+.services .card .title h3{ margin: 0 0 6px !important; }
+.services .card .price{ margin: 2px 0 10px !important; }
+.services .card ul.clean{ margin: 0 !important; padding-left: 18px !important; }
+.services .card ul.clean li{ margin: 6px 0 !important; line-height: 1.5 !important; }
+
+/* === 5) Заголовок-секция — чтобы сам заголовок не влиял на ширину сетки === */
+.services .section > .container.narrow{
+  max-width: 1100px;     /* узкий только для заголовка/подзаголовка */
+  margin-bottom: 24px;
+}
+/* A) Фон не осветляем: только фото, без вуали, непрозрачное */
+:root{
+  --svc-bg-tint: transparent !important;  /* на всякий: убираем светлый тинт */
+}
+.services::before{
+  background: var(--svc-bg) center/cover no-repeat !important;
+  opacity: 1 !important;                 /* ← было светло — делаем 100% фото */
+  filter: none !important;                /* на всякий отключим любые фильтры */
+}
+
+/* Гарантированно убираем «молочный» слой/блюр над фоном */
+.services .section > .container{
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* B) Списки в карточках — вернуть отступ и маркеры */
+.services .card ul.clean{
+  list-style: disc outside !important;
+  padding-left: 30px !important;   /* отступ слева у списка */
+  margin: 0 !important;
+}
+.services .card ul.clean li{
+  margin: 6px 0 !important;
+  line-height: 1.5 !important;
+}
+
+
+.lightbox{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.92);
+  display: none;
+  z-index: 9999;
+  touch-action: pan-y;
+}
+.lightbox.open{ display: grid; place-items: center; }
+
+.lightbox img{
+  max-width: 96vw;
+  max-height: 92vh;
+  object-fit: contain;
+}
+
+.lightbox .close{
+  position:absolute;
+  top: 14px;
+  right: 30px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  font-size: 26px;
+  line-height: 40px;
+  cursor: pointer;
+}
+/* ===== Inquiry: по центру и шире на десктопе ===== */
+.inquiry .section{
+  justify-items: center;     /* было start */
+}
+
+.inquiry .section > .container.narrow{
+  margin-left: auto;         /* убираем левый отступ */
+  margin-right: auto;
+  max-width: 650px;          /* было 560, сделаем шире */
+  width: min(720px, 92vw);
+}
+
+/* Чуть плотнее отступы, чтобы меньше скролла */
+.inquiry .section > .container.narrow{
+  padding: 24px 22px;
+}
+.inquiry form{ gap: 12px; }
+.inquiry input{ padding: 14px 14px; }
+.inquiry textarea{ min-height: 110px; }
+/* ===== Mobile portfolio: 2-column masonry (override grid) ===== */
+
+/* === Lightbox close button: always centered inside its own square === */
+#lightbox .lightbox-close,
+#lightbox .close,
+#lightbox [data-lb-close],
+#lightbox #lightboxClose{
+  position: absolute;
+  top: 14px;
+  right: 14px;
+
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;          /* ✅ центрирует крестик внутри рамочки */
+  line-height: 1;               /* ✅ убирает смещение текста */
+  padding: 0;                   /* ✅ чтобы не было сдвига из-за padding */
+}
+
+/* На телефоне учитываем safe-area и чуть подправляем размеры */
+@media (max-width: 640px){
+  #lightbox .lightbox-close,
+  #lightbox .close,
+  #lightbox [data-lb-close],
+  #lightbox #lightboxClose{
+    top: calc(12px + env(safe-area-inset-top));
+    right: calc(12px + env(safe-area-inset-right));
+    width: 40px;
+    height: 40px;
+  }
+}
+/* ===== Mobile portfolio: 2-column masonry (override grid) ===== */
+@media (max-width: 640px){
+  .gallery{
+    display: block !important;      /* важно: выключаем grid */
+    column-count: 2;
+    column-gap: 8px;
+
+    /* на всякий случай сбрасываем grid-свойства */
+    grid-template-columns: unset !important;
+    grid-auto-flow: unset !important;
+    gap: unset !important;
+  }
+
+  .gallery figure{
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    margin: 0 0 8px !important;
+
+    width: 100% !important;
+    display: inline-block;          /* важно для columns */
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .gallery img{
+    width: 100%;
+    height: auto !important;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* первая чуть короче */
+  .gallery figure:first-child img{
+    aspect-ratio: 4 / 5;
+  }
+
+  /* остальные одинаковые */
+  .gallery figure:not(:first-child) img{
+    aspect-ratio: 3 / 4;
+  }
+}
